@@ -11,12 +11,11 @@ class Solution(object):
         :type k: int
         :rtype: List[int]
         """
-        dq = deque()
-        result = []
+        result, dq = [], deque()
         for i in xrange(len(nums)):
-            if i >= k and dq and i-dq[0] == k:
+            if dq and i-dq[0] == k:
                 dq.popleft()
-            while dq and nums[i] >= nums[dq[-1]]:
+            while dq and nums[dq[-1]] <= nums[i]:
                 dq.pop()
             dq.append(i)
             if i >= k-1:
